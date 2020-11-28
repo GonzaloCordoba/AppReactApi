@@ -8,14 +8,15 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.handlerClick = this.handlerClick.bind(this);
-    this.handlerText = this.handlerText.bind(this);
+    this.handlerChange = this.handlerChange.bind(this);
     this.state = {consulteApi:false} ;
   }
 
   handlerClick(){
     console.log("handleado");
-
+    
     var nombre = this.state.nombre;
+    
 
     axios.get('https://breakingbadapi.com/api/characters',{params:{name:nombre}})
       .then( response =>{
@@ -28,7 +29,7 @@ class App extends React.Component {
       });
   }
 
-  handlerText(event){
+  handlerChange(event){
 
     this.setState({nombre: event.target.value});
   }
@@ -67,10 +68,11 @@ class App extends React.Component {
         <header className="App-header">
           <h1>Breaking Bad API</h1>
           <p>Personaje: </p>
-          <input className="boton" type="text" onChange={this.handlerText} ></input>
+          <input className="boton" type="text" onChange={this.handlerChange} ></input>
           <button className="boton" onClick={this.handlerClick}>Buscar</button>
          
           {resultados}
+          
           
         </header>
       </div>
